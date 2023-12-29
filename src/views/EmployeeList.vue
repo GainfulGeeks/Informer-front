@@ -34,10 +34,10 @@
 
                                 </div>
                             </td>
-                            <td class="py-2 px-4 border-b text-center">{{ employee.FirstName }}</td>
-                            <td class="py-2 px-4 border-b text-center">{{employee.PersonnelCode}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{employee.PhoneNumber}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{employee.Address}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.firstName}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.personnelCode}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.phoneNumbe}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.address}}</td>
                             <td class="py-2 px-4 border-b text-center">
                                 <!-- Delete Icon -->
                                 <IButton icon="trash" ></IButton>
@@ -58,18 +58,10 @@
 import {ref} from 'vue';
 import IButton from "../components/kit/IButton.vue";
 
-// const employeeData = ref( [
-// {name: "ali", personnelCode:"123456" , phoneNumber: "09121234567", state:"Active", id:1 },
-// {name: "mamad", personnelCode:"12365755" , phoneNumber: "091212336567", state:"Active", id:2}, 
-// {name: "maryam", personnelCode:"123334654" , phoneNumber: "09101233667", state:"Inactive", id:3}, 
-// {name: "nazi", personnelCode:"11323654" , phoneNumber: "09115673667", state:"Inactive", id:4}, 
-// {name: "zahra", personnelCode:"12334654" , phoneNumber: "03651233667", state:"Active" ,id:5} 
-// ])
-
 const getEmployee = async () => {
-  const url = "https://localhost:7178/";
+  const url = "https://localhost:7178/api/employees";
   const response = await fetch(url);
-  countries.value = await response.json();
+  employees.value = await response.json();
 };
 
 getEmployee();
