@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         <!-- Employee Row  -->
-                        <tr v-for="employee in getEmployee" :key="employee.Id">
+                        <tr v-for="employee in employees" :key="employee.id">
                             <td class="py-2 px-4 border-b text-center flex justify-center">
                                 <!-- SVG Placeholder for Employee Picture -->
                                 <div class="bg-primary p-2 rounded-full w-10 h-10 flex justify-center items-center">
@@ -54,20 +54,16 @@
 
   </template>
   
-  <script setup>
+<script setup>
+
 import {ref} from 'vue';
 import IButton from "../components/kit/IButton.vue";
+const employees = ref(null);
+fetch('https://localhost:7178/api/employees')
+    .then(response => response.json())
+    .then(data => employees.value = data);
 
-const getEmployee = async () => {
-  const url = "https://localhost:7178/api/employees";
-  const response = await fetch(url);
-  employees.value = await response.json();
-};
-
-getEmployee();
-
-  </script>
+</script>
   
-
-
-<style></style>
+<style>
+</style>
