@@ -59,7 +59,7 @@
 import {ref} from 'vue';
 import IButton from "../components/kit/IButton.vue";
 const employees = ref(null);
-fetch('https://localhost:7178/api/employees')
+fetch('/api/employees')
     .then(response => response.json())
     .then(data => employees.value = data);
 
