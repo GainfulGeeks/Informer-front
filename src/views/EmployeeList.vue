@@ -36,7 +36,7 @@
                             </td>
                             <td class="py-2 px-4 border-b text-center">{{employee.firstName}}</td>
                             <td class="py-2 px-4 border-b text-center">{{employee.personnelCode}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{employee.phoneNumbe}}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.phoneNumber}}</td>
                             <td class="py-2 px-4 border-b text-center">{{employee.address}}</td>
                             <td class="py-2 px-4 border-b text-center">
                                 <!-- Delete Icon -->
