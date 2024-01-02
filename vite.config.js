@@ -12,5 +12,16 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+    // other webpack configurations...
+    devServer: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:7178',
+          secure: false,
+          changeOrigin: true,
+        },
+      },
+    }
 })
+
