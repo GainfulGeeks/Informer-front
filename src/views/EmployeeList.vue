@@ -16,7 +16,7 @@
                     </thead>
                     <tbody>
                         <!-- Employee Row  -->
-                        <tr v-for="employee in employeeData" :key="employee.id">
+                        <tr v-for="employee in employees" :key="employee.id">
                             <td class="py-2 px-4 border-b text-center flex justify-center">
                                 <!-- SVG Placeholder for Employee Picture -->
                                 <div class="bg-primary p-2 rounded-full w-10 h-10 flex justify-center items-center">
@@ -34,10 +34,10 @@
 
                                 </div>
                             </td>
-                            <td class="py-2 px-4 border-b text-center">{{ employee.name }}</td>
+                            <td class="py-2 px-4 border-b text-center">{{employee.firstName}}</td>
                             <td class="py-2 px-4 border-b text-center">{{employee.personnelCode}}</td>
                             <td class="py-2 px-4 border-b text-center">{{employee.phoneNumber}}</td>
-                            <td class="py-2 px-4 border-b text-center">{{employee.state}}</td>
+                            <td class="py-2 px-4 border-b text-center">Active</td>
                             <td class="py-2 px-4 border-b text-center">
                                 <!-- Delete Icon -->
                                 <IButton icon="trash" ></IButton>
@@ -54,22 +54,16 @@
 
   </template>
   
-  <script setup>
+<script setup>
+
 import {ref} from 'vue';
 import IButton from "../components/kit/IButton.vue";
+const employees = ref(null);
+fetch('/api/employees')
+    .then(response => response.json())
+    .then(data => employees.value = data);
 
-const employeeData = ref( [
-{name: "ali", personnelCode:"123456" , phoneNumber: "09121234567", state:"Active", id:1 },
-{name: "mamad", personnelCode:"12365755" , phoneNumber: "091212336567", state:"Active", id:2}, 
-{name: "maryam", personnelCode:"123334654" , phoneNumber: "09101233667", state:"Inactive", id:3}, 
-{name: "nazi", personnelCode:"11323654" , phoneNumber: "09115673667", state:"Inactive", id:4}, 
-{name: "zahra", personnelCode:"12334654" , phoneNumber: "03651233667", state:"Active" ,id:5} 
-])
-
-
-
-  </script>
+</script>
   
-
-
-<style></style>
+<style>
+</style>
