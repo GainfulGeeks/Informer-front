@@ -1,5 +1,5 @@
 <template>
-<div class="flex h-screen">
+<div class="flex h-screen p-5">
   <!-- Right Pane -->
   <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
     <div class="max-w-md w-full p-6">
