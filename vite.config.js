@@ -13,11 +13,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
-    // other webpack configurations...
-    devServer: {
+    // https://vitejs.dev/config/server-options#server-proxy
+    server: {
       proxy: {
         '/api': {
-          target: 'http://localhost:7178',
+          target: 'https://localhost:7178',
           secure: false,
           changeOrigin: true,
         },
