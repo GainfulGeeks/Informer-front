@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "pinia": "^2.1.7",
+    "vee-validate": "^4.12.5",
     "vue": "^3.4.10",
     "vue-router": "^4.2.5",
     "vue-types": "^5.1.1"
