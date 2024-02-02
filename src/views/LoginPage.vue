@@ -4,9 +4,10 @@
   <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
     <div class="max-w-md w-full p-6">
       <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
-      <form action="#" method="POST" class="space-y-4">
-        <i-input v-model="credentials.email" label="email" id="email" placeholder="Enter your email address" />
-        <i-input v-model="credentials.password" label="password" id="email" placeholder="Enter your Password" />
+      <!-- <form action="#" method="POST" class="space-y-4"> -->
+        <form class="space-y-4">
+        <i-input :rules="isRequired" v-model="credentials.email" label="email" id="email" placeholder="Enter your email address" />
+        <i-input :rules="isRequired" v-model="credentials.password" label="password" id="email" placeholder="Enter your Password" />
 
         <div class="flex items-center justify-between">
           <div class="flex items-center">

@@ -2,6 +2,7 @@
   <div>
     <label :for="id" class="block text-sm font-medium text-gray-500">{{ label }}</label>
     <input
+    :rules="isRequired"
       v-model="modelValue"
       :placeholder
       type="text"
@@ -23,6 +24,16 @@ defineProps({
 })
 
 const modelValue = defineModel()
+
+
+import { Field, Form, ErrorMessage } from 'vee-validate';
+function isRequired(value) {
+  if (value && value.trim()) {
+    return true;
+  }
+  return 'This is required';
+}
+
 </script>
 
 <style lang="scss" scoped></style>
