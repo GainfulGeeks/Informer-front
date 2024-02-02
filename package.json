@@ -11,6 +11,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.3",
     "pinia": "^2.1.7",
     "vee-validate": "^4.12.5",
     "vue": "^3.4.10",

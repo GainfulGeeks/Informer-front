@@ -5,7 +5,7 @@
     <div class="max-w-md w-full p-6">
       <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
       <!-- <form action="#" method="POST" class="space-y-4"> -->
-        <form class="space-y-4">
+        <form @submit="handleSubmit" class="space-y-4">
         <i-input :rules="isRequired" v-model="credentials.email" label="email" id="email" placeholder="Enter your email address" />
         <i-input :rules="isRequired" v-model="credentials.password" label="password" id="email" placeholder="Enter your Password" />
 
@@ -34,5 +34,25 @@
 <script setup>
 import {ref} from "vue"
 import IInput from '@/components/kit/IInput.vue';
-const credentials = ref({email:"",password:""});
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validations";
+import { Field, Form } from "vee-validate";
+
+const credentials = ref({ email: "", password: "" });
+// const { $v, $pending, $reset } = useVuelidate(credentials);
+
+function isRequired(value) {
+  if (value && value.trim()) {
+    return true;
+  }
+  return "This field is required";
+}
+
+// function login() {
+//   if ($v.$pending) return;
+
+//   $reset();
+// }
+
+
 </script>
