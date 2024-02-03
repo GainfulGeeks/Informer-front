@@ -15,17 +15,17 @@
 </template>
 
 <script setup>
-import { string } from 'vue-types';
-import { defineModel } from 'vue';
-import { Field, ErrorMessage } from 'vee-validate';
+import { string } from 'vue-types'
+import { defineModel } from 'vue'
+import { Field, ErrorMessage } from 'vee-validate'
 
 defineProps({
   id: string().def(undefined),
   label: string(),
-  placeholder: string(),
-});
+  placeholder: string()
+})
 
-const modelValue = defineModel();
+const modelValue = defineModel()
 </script>
 
 <style lang="scss" scoped></style>
