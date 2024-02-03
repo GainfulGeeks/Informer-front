@@ -5,21 +5,23 @@
     <div class="max-w-md w-full p-6">
       <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
       <!-- <form action="#" method="POST" class="space-y-4"> -->
-        <form @submit="handleSubmit" class="space-y-4">
-        <i-input :rules="isRequired" v-model="credentials.email" label="email" id="email" placeholder="Enter your email address" />
-        <i-input :rules="isRequired" v-model="credentials.password" label="password" id="email" placeholder="Enter your Password" />
+        <form @submit.prevent="handleSubmit" class="space-y-4">
+      <i-input v-model="credentials.email" label="Email" id="email" placeholder="Enter your email address" />
+      <i-input v-model="credentials.password" label="Password" id="password" placeholder="Enter your Password" />
+      <div class="flex items-center justify-between">
+        <div class="flex items-center">
+          <input type="checkbox" id="rememberMe" name="rememberMe" class="mr-2">
+          <label for="rememberMe" class="text-sm text-gray-500">Remember me</label>
+        </div>
+        <a href="#" class="text-sm text-gray-500 hover:underline">Forgot Password?</a>
+      </div>
+      <div>
+        <button type="submit" class="rounded-full w-full bg-primary text-white p-2 hover:bg-gray-800 focus:bg-black transition-colors duration-300">Log In</button>
+      </div>
+    </form>
 
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input type="checkbox" id="rememberMe" name="rememberMe" class="mr-2">
-            <label for="rememberMe" class="text-sm text-gray-500">Remember me</label>
-          </div>
-          <a href="#" class="text-sm text-gray-500 hover:underline">Forgot Password?</a>
-        </div>
-        <div>
-          <button type="submit" class="rounded-full w-full bg-primary text-white p-2 hover:bg-gray-800 focus:bg-black  transition-colors duration-300">Log In</button>
-        </div>
-      </form>
+
+
     </div>
   </div>
     <!-- Left Pane -->
@@ -31,28 +33,28 @@
 </div>
 </template>
 
+
 <script setup>
-import {ref} from "vue"
-import IInput from '@/components/kit/IInput.vue';
-import { useVuelidate } from "@vuelidate/core";
-import { required } from "@vuelidate/validations";
-import { Field, Form } from "vee-validate";
+import { ref } from 'vue';
+import { useForm } from 'vee-validate';
 
-const credentials = ref({ email: "", password: "" });
-// const { $v, $pending, $reset } = useVuelidate(credentials);
+const credentials = ref({ email: '', password: '' });
 
-function isRequired(value) {
-  if (value && value.trim()) {
-    return true;
+const { validate, handleSubmit } = useForm();
+
+async function onSubmit() {
+  try {
+    await validate();
+    console.log('Login successful!');
+    console.log('Email:', credentials.email);
+    console.log('Password:', credentials.password);
+
+    // i should reset form fields or redirect to another page as needed
+
+  } catch (error) {
+    console.error('Validation Error:', error);
+    alert(error.message);
   }
-  return "This field is required";
 }
-
-// function login() {
-//   if ($v.$pending) return;
-
-//   $reset();
-// }
-
-
 </script>
+
