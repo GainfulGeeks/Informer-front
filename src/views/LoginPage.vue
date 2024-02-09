@@ -4,18 +4,21 @@
     <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
       <div class="max-w-md w-full p-6">
         <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
-        <form @submit.prevent="handleSubmit" class="space-y-4">
+        <form @submit.prevent="onSubmit" class="space-y-4">
           <IInput
             v-model="credentials.email"
             label="Email"
             id="email"
             placeholder="Enter your email address"
+            :error="errors.email && (errors.email[0] !== 'The email field is required.' || credentials.email)"
           />
+
           <IInput
             v-model="credentials.password"
             label="Password"
             id="password"
             placeholder="Enter your Password"
+            :error="errors.password"
           />
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -36,9 +39,7 @@
       </div>
     </div>
     <!-- Left Pane -->
-    <div
-      class="hidden lg:flex items-center justify-center flex-1 bg-primary text-black rounded-2xl"
-    >
+    <div class="hidden lg:flex items-center justify-center flex-1 bg-primary text-black rounded-2xl">
       <div class="max-w-md text-center">
         <img src="../assets/images/login.svg" />
       </div>
@@ -51,12 +52,13 @@ import { ref } from 'vue'
 import { useForm } from 'vee-validate'
 import IInput from '/src/components/kit/IInput.vue'
 import { defineRule } from 'vee-validate'
-import { required } from '@vee-validate/rules'
+import { required, email } from '@vee-validate/rules'
 
 defineRule('required', required)
+defineRule('email', email)
 
 const credentials = ref({ email: '', password: '' })
-const { validate, handleSubmit } = useForm()
+const { validate, errors } = useForm()
 
 async function onSubmit() {
   try {
@@ -69,7 +71,6 @@ async function onSubmit() {
     credentials.value.password = ''
   } catch (error) {
     console.error('Validation Error:', error)
-    alert(error.message)
   }
 }
 </script>
