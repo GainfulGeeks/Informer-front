@@ -4,15 +4,14 @@
     <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
       <div class="max-w-md w-full p-6">
         <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
-        <!-- <form action="#" method="POST" class="space-y-4"> -->
         <form @submit.prevent="handleSubmit" class="space-y-4">
-          <i-input
+          <IInput
             v-model="credentials.email"
             label="Email"
             id="email"
             placeholder="Enter your email address"
           />
-          <i-input
+          <IInput
             v-model="credentials.password"
             label="Password"
             id="password"
@@ -50,19 +49,24 @@
 <script setup>
 import { ref } from 'vue'
 import { useForm } from 'vee-validate'
+import IInput from '/src/components/kit/IInput.vue'
+import { defineRule } from 'vee-validate'
+import { required } from '@vee-validate/rules'
+
+defineRule('required', required)
 
 const credentials = ref({ email: '', password: '' })
-
 const { validate, handleSubmit } = useForm()
 
-async function onSubmit () {
+async function onSubmit() {
   try {
     await validate()
     console.log('Login successful!')
-    console.log('Email:', credentials.email)
-    console.log('Password:', credentials.password)
-
-    // i should reset form fields or redirect to another page as needed
+    console.log('Email:', credentials.value.email)
+    console.log('Password:', credentials.value.password)
+    // Reset form fields or redirect to another page as needed
+    credentials.value.email = ''
+    credentials.value.password = ''
   } catch (error) {
     console.error('Validation Error:', error)
     alert(error.message)
