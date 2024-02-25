@@ -2,23 +2,21 @@
   <div class="flex h-screen p-5">
     <!-- Right Pane -->
     <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
-      <div class="max-w-md w-full p-6">
+      <div class="max-w-md w-full p-6 space-y-4">
         <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
-        <form @submit.prevent="onSubmit" class="space-y-4">
           <IInput
-            v-model="credentials.email"
+            v-model="userInfo.email"
             label="Email"
             id="email"
+            rule="email"
             placeholder="Enter your email address"
-            :error="errors.email && (errors.email[0] !== 'The email field is required.' || credentials.email)"
           />
-
           <IInput
-            v-model="credentials.password"
+            v-model="userInfo.password"
             label="Password"
             id="password"
+            rule="password"
             placeholder="Enter your Password"
-            :error="errors.password"
           />
           <div class="flex items-center justify-between">
             <div class="flex items-center">
@@ -29,13 +27,12 @@
           </div>
           <div>
             <button
-              type="submit"
+              @click="submit"
               class="rounded-full w-full bg-primary text-white p-2 hover:bg-gray-800 focus:bg-black transition-colors duration-300"
             >
               Log In
             </button>
           </div>
-        </form>
       </div>
     </div>
     <!-- Left Pane -->
@@ -48,29 +45,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useForm } from 'vee-validate'
-import IInput from '/src/components/kit/IInput.vue'
-import { defineRule } from 'vee-validate'
-import { required, email } from '@vee-validate/rules'
+import IInput from '/src/components/kit/IInput.vue';
+import { ref } from 'vue';
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
+import router from '@/router';
 
-defineRule('required', required)
-defineRule('email', email)
+const userInfo = ref({
+  email: null,
+  password: null,
+})
 
-const credentials = ref({ email: '', password: '' })
-const { validate, errors } = useForm()
-
-async function onSubmit() {
-  try {
-    await validate()
-    console.log('Login successful!')
-    console.log('Email:', credentials.value.email)
-    console.log('Password:', credentials.value.password)
-    // Reset form fields or redirect to another page as needed
-    credentials.value.email = ''
-    credentials.value.password = ''
-  } catch (error) {
-    console.error('Validation Error:', error)
-  }
+const loginSchema = yup.object({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).required(),
+})
+const { validate: validateForm } = useForm({
+  validationSchema: loginSchema
+})
+const isFromValid = ref(false)
+const validate = async () => {
+  await validateForm().then(res => {
+    if(res.valid) isFromValid.value = true
+  })
 }
+const submit = async () => {
+  await validate()
+  if(isFromValid.value) {
+    alert(`Form is valid!!!  ====${JSON.stringify(userInfo.value)}====`)
+    localStorage.setItem('token', 'sadhfaasdfhbaksdb')
+    router.push('/')
+  } 
+}
+
+
+
 </script>
