@@ -4,14 +4,14 @@
     <div class="w-full bg-white lg:w-1/3 flex items-center justify-center rounded-2xl">
       <div class="max-w-md w-full p-6 space-y-4">
         <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
-          <IInput
+          <ITextField
             v-model="userInfo.email"
             label="Email"
             id="email"
             rule="email"
             placeholder="Enter your email address"
           />
-          <IInput
+          <ITextField
             v-model="userInfo.password"
             label="Password"
             id="password"
@@ -45,7 +45,7 @@
 </template>
 
 <script setup>
-import IInput from '/src/components/kit/IInput.vue';
+import ITextField from '/src/components/kit/ITextField.vue';
 import { ref } from 'vue';
 import { useForm } from 'vee-validate';
 import * as yup from 'yup';
@@ -74,7 +74,7 @@ const submit = async () => {
   if(isFromValid.value) {
     alert(`Form is valid!!!  ====${JSON.stringify(userInfo.value)}====`)
     localStorage.setItem('token', 'sadhfaasdfhbaksdb')
-    router.push('/')
+    router.push('/employees')
   } 
 }
 
