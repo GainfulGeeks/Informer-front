@@ -6,7 +6,7 @@
         <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign in</h1>
         <ITextField v-model="userInfo.email" label="Email" id="email" rule="email"
           placeholder="Enter your email address" />
-        <ITextField v-model="userInfo.password" label="Password" id="password" rule="password"
+        <ITextField v-model="userInfo.password" type="password" label="Password" id="password" rule="password"
           placeholder="Enter your Password" />
         <div class="flex items-center justify-between">
           <div class="flex items-center">
@@ -46,7 +46,7 @@ const userInfo = ref({
 
 const loginSchema = yup.object({
   email: yup.string().email().required(),
-  password: yup.string().min(8).required(),
+  password: yup.string().required(),
 })
 const { validate: validateForm } = useForm({
   validationSchema: loginSchema
