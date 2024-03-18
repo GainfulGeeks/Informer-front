@@ -59,7 +59,11 @@
 import {ref} from 'vue';
 import IButton from "../components/kit/IButton.vue";
 const employees = ref(null);
-fetch('/api/employees')
+fetch('/api/employees',{
+    headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+    }
+})
     .then(response => response.json())
     .then(data => employees.value = data);
 
