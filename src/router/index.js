@@ -5,7 +5,7 @@ import LoginPage from '../views/LoginPage.vue'
 
 function isAuthenticated() {
   //  authentication logic should be  here
-  return localStorage.getItem('token') !== null;
+  return localStorage.getItem('accessToken') !== null;
 }
 
 const router = createRouter({
