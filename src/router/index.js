@@ -39,7 +39,10 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      component: LoginPage
+      component: () => {
+        if(localStorage.getItem('accessToken')) return AuthenticatedLayout
+        else return LoginPage
+      }
     }
   ]
 })
