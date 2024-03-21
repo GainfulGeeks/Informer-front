@@ -12,5 +12,16 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  }
+  },
+    // https://vitejs.dev/config/server-options#server-proxy
+    server: {
+      proxy: {
+        '/api': {
+          target: 'https://localhost:7178',
+          secure: false,
+          changeOrigin: true,
+        },
+      },
+    }
 })
+
