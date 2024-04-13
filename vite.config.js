@@ -17,7 +17,7 @@ export default defineConfig({
     server: {
       proxy: {
         '/api': {
-          target: 'https://localhost:7178',
+          target: 'http://informer.gainfulgeeks.ir',
           secure: false,
           changeOrigin: true,
         },
